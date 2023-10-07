@@ -24,16 +24,18 @@ const auth = (type = "none") => {
     next: NextFunction
   ): Promise<any> => {
     const { db, redis } = req.app.locals;
-    const token = req.header("Authorization").replace("Bearer ", "");
-    // const token =
-    //   req.body.token || req.query.token || req.headers["x-access-token"];
-
+    const token = req.header("Authorization");
     if (!token) {
       return res.status(403).send("A token is required for authentication");
     }
+    console.log();
+    const newtoken = req.header("Authorization").replace("Bearer ", "");
+    // const token =
+    //   req.body.token || req.query.token || req.headers["x-access-token"];
+
     try {
       // const decoded = jwt.verify(token, config.TOKEN_KEY as string);
-      const decodedToken = jwt_decode<JwtPayload>(token);
+      const decodedToken = jwt_decode<JwtPayload>(newtoken);
       const { user_id } = decodedToken;
       req.user = user_id;
       next();

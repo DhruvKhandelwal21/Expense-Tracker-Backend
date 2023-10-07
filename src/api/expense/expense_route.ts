@@ -10,5 +10,5 @@ const router = express.Router();
 router.get("/find", auth(), findExpense);
 router.post("/create", auth(), addExpense);
 router.put("/update/:id", updateExpense);
-router.put("/delete/:id", auth(), deleteExpense);
+router.put("/delete/:id",auth(), deleteExpense);
 export default router;
