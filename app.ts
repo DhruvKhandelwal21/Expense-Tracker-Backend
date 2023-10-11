@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoConnect from "./src/mongodb/db";
 import * as dotenv from "dotenv";
-import routes from './src/Routes/routes';
+import routes from "./src/Routes/routes";
 dotenv.config();
 // const { MongoClient, ServerApiVersion } = require("mongodb");
 
@@ -11,6 +11,9 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
+app.get("/", (req, res) => {
+  res.send({ message: "Hello World!" });
+});
 app.use(routes);
 const database = async () => {
   const client = await mongoConnect();
